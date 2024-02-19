@@ -85,12 +85,7 @@ func writeToArchive(tw *tar.Writer, root string, skipSymlinks bool, written *int
 		}
 
 		var name string
-
-		if strings.HasPrefix(path, "/") {
-			name, err = filepath.Abs(path)
-		} else {
-			name, err = relative(root, path)
-		}
+		name, err = relative(root, path)
 
 		if err != nil {
 			return fmt.Errorf("relative name <%s>: <%s>, %w", path, root, err)
